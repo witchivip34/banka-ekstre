@@ -1,0 +1,42 @@
+{
+  "_aciklama": "F1-F6 muhasebe içe aktarım şablonu. Her banka için 6 kolonun hangi alanı taşıyacağı, çıkan tutarın işareti ve başlıkta kalın yazılacak kolonlar (0 tabanlı). Alanlar: tarih, aciklama, referans, giren, cikan, bakiye, banka ve boş metin. giren/cikan/bakiye sayı (0.00), diğerleri metin (@) biçiminde yazılır.",
+  "sayfa_adi": "Sayfa",
+  "baslik": ["F1", "F2", "F3", "F4", "F5", "F6"],
+  "bankalar": {
+    "ziraat": {
+      "kolonlar": ["tarih", "", "referans", "aciklama", "giren", "cikan"],
+      "cikan_isareti": "mutlak",
+      "kalin_baslik": [0, 1, 2, 3, 4, 5]
+    },
+    "yapikredi": {
+      "kolonlar": ["tarih", "", "referans", "aciklama", "giren", "cikan"],
+      "cikan_isareti": "negatif",
+      "kalin_baslik": [0, 1, 2, 3, 4, 5]
+    },
+    "turkiyefinans": {
+      "kolonlar": ["tarih", "", "referans", "aciklama", "giren", "cikan"],
+      "cikan_isareti": "negatif",
+      "kalin_baslik": [0, 1, 2, 3, 4, 5]
+    },
+    "garanti": {
+      "kolonlar": ["tarih", "", "aciklama", "giren", "cikan", "referans"],
+      "cikan_isareti": "mutlak",
+      "kalin_baslik": [0, 2, 3, 4, 5]
+    },
+    "isbankasi": {
+      "kolonlar": ["tarih", "", "giren", "cikan", "aciklama", "referans"],
+      "cikan_isareti": "mutlak",
+      "kalin_baslik": []
+    },
+    "vakifbank": {
+      "kolonlar": ["tarih", "", "giren", "cikan", "referans", "aciklama"],
+      "cikan_isareti": "negatif",
+      "kalin_baslik": []
+    }
+  },
+  "varsayilan": {
+    "kolonlar": ["tarih", "", "referans", "aciklama", "giren", "cikan"],
+    "cikan_isareti": "mutlak",
+    "kalin_baslik": [0, 1, 2, 3, 4, 5]
+  }
+}

@@ -1,0 +1,16 @@
+# Gerçek ekstreler ve çıktılar depoya girmez (yalnız sentetik örnekler)
+*.xls
+*.xlsx
+!ornekler/*.xls
+!ornekler/*.xlsx
+*.csv
+cikti/
+
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+build/
+dist/
+.venv/
+.pytest_cache/
