@@ -29,7 +29,7 @@ altta dipnotlar. Ay sonunda bu dosyaları muhasebe programına aktarmak çoğu z
 Python 3.10 veya üstü gerekir.
 
 ```bash
-git clone https://github.com/witchivip34-dev/banka-ekstre.git
+git clone https://github.com/witchivip34/banka-ekstre.git
 cd banka-ekstre
 pip install -e .            # xlrd, xlwt, openpyxl kurulur
 pip install -e ".[excel]"   # isteğe bağlı: Windows'ta --excel-resave için pywin32
