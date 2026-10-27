@@ -1,0 +1,83 @@
+flowchart TD
+
+subgraph group_entry["Entry points"]
+  node_python_entry["Module entry<br/>[__main__.py]"]
+  node_cli["CLI commands<br/>[cli.py]"]
+end
+
+subgraph group_ingest["Input and detection"]
+  node_statement_api["Statement API<br/>[ekstre.py]"]
+  node_reader["XLS/XLSX reader<br/>[readers.py]"]
+  node_detection["Bank detection<br/>[tespit.py]"]
+  node_registry["Bank registry<br/>[__init__.py]"]
+end
+
+subgraph group_parsing["Bank parsing"]
+  node_shared_parser["Shared parsing<br/>[_ortak.py]"]
+  node_ziraat["Ziraat parser<br/>[ziraat.py]"]
+  node_yapikredi["Yapı Kredi parser<br/>[yapikredi.py]"]
+  node_garanti["Garanti parser<br/>[garanti.py]"]
+  node_isbankasi["İş Bankası parser<br/>[isbankasi.py]"]
+  node_turkiyefinans["Türkiye Finans parser<br/>[turkiyefinans.py]"]
+  node_vakifbank["VakıfBank parser<br/>[vakifbank.py]"]
+end
+
+subgraph group_domain["Transaction model"]
+  node_text_helpers["Text and date helpers<br/>[metin.py]"]
+  node_transaction["Transaction model<br/>[model.py]"]
+end
+
+node_user(("User"))
+
+node_user -->|"runs commands"| node_cli
+node_python_entry -->|"starts CLI"| node_cli
+node_cli -->|"reads statements"| node_statement_api
+node_cli -->|"summarizes transactions"| node_transaction
+node_statement_api -->|"reads rows"| node_reader
+node_statement_api -->|"identifies bank"| node_detection
+node_statement_api -->|"dispatches parser"| node_registry
+node_detection -->|"reads rows"| node_reader
+node_detection -->|"checks bank signatures"| node_registry
+node_detection -->|"normalizes names"| node_text_helpers
+node_registry -->|"registers"| node_ziraat
+node_registry -->|"registers"| node_yapikredi
+node_registry -->|"registers"| node_garanti
+node_registry -->|"registers"| node_isbankasi
+node_registry -->|"registers"| node_turkiyefinans
+node_registry -->|"registers"| node_vakifbank
+node_ziraat -->|"delegates parsing"| node_shared_parser
+node_yapikredi -->|"delegates parsing"| node_shared_parser
+node_garanti -->|"delegates parsing"| node_shared_parser
+node_isbankasi -->|"delegates parsing"| node_shared_parser
+node_turkiyefinans -->|"delegates parsing"| node_shared_parser
+node_vakifbank -->|"delegates parsing"| node_shared_parser
+node_shared_parser -->|"normalizes fields"| node_text_helpers
+node_shared_parser -->|"creates transactions"| node_transaction
+
+click node_python_entry "https://github.com/witchivip34/banka-ekstre/blob/main/banka_ekstre/__main__.py"
+click node_cli "https://github.com/witchivip34/banka-ekstre/blob/main/banka_ekstre/cli.py"
+click node_statement_api "https://github.com/witchivip34/banka-ekstre/blob/main/banka_ekstre/ekstre.py"
+click node_reader "https://github.com/witchivip34/banka-ekstre/blob/main/banka_ekstre/readers.py"
+click node_detection "https://github.com/witchivip34/banka-ekstre/blob/main/banka_ekstre/tespit.py"
+click node_registry "https://github.com/witchivip34/banka-ekstre/blob/main/banka_ekstre/bankalar/__init__.py"
+click node_shared_parser "https://github.com/witchivip34/banka-ekstre/blob/main/banka_ekstre/bankalar/_ortak.py"
+click node_ziraat "https://github.com/witchivip34/banka-ekstre/blob/main/banka_ekstre/bankalar/ziraat.py"
+click node_yapikredi "https://github.com/witchivip34/banka-ekstre/blob/main/banka_ekstre/bankalar/yapikredi.py"
+click node_garanti "https://github.com/witchivip34/banka-ekstre/blob/main/banka_ekstre/bankalar/garanti.py"
+click node_isbankasi "https://github.com/witchivip34/banka-ekstre/blob/main/banka_ekstre/bankalar/isbankasi.py"
+click node_turkiyefinans "https://github.com/witchivip34/banka-ekstre/blob/main/banka_ekstre/bankalar/turkiyefinans.py"
+click node_vakifbank "https://github.com/witchivip34/banka-ekstre/blob/main/banka_ekstre/bankalar/vakifbank.py"
+click node_text_helpers "https://github.com/witchivip34/banka-ekstre/blob/main/banka_ekstre/metin.py"
+click node_transaction "https://github.com/witchivip34/banka-ekstre/blob/main/banka_ekstre/model.py"
+
+classDef toneNeutral fill:#f8fafc,stroke:#334155,stroke-width:1.5px,color:#0f172a
+classDef toneBlue fill:#dbeafe,stroke:#2563eb,stroke-width:1.5px,color:#172554
+classDef toneAmber fill:#fef3c7,stroke:#d97706,stroke-width:1.5px,color:#78350f
+classDef toneMint fill:#dcfce7,stroke:#16a34a,stroke-width:1.5px,color:#14532d
+classDef toneRose fill:#ffe4e6,stroke:#e11d48,stroke-width:1.5px,color:#881337
+classDef toneIndigo fill:#e0e7ff,stroke:#4f46e5,stroke-width:1.5px,color:#312e81
+classDef toneTeal fill:#ccfbf1,stroke:#0f766e,stroke-width:1.5px,color:#134e4a
+class node_python_entry,node_cli,node_user toneBlue
+class node_statement_api,node_reader,node_detection,node_registry toneAmber
+class node_shared_parser,node_ziraat,node_yapikredi,node_garanti,node_isbankasi,node_turkiyefinans,node_vakifbank toneMint
+class node_text_helpers,node_transaction toneRose

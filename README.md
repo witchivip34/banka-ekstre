@@ -24,6 +24,12 @@ altta dipnotlar. Ay sonunda bu dosyaları muhasebe programına aktarmak çoğu z
 | `bakiye` | işlem sonrası bakiye (varsa) |
 | `banka`, `kaynak_dosya`, `satir_no` | izlenebilirlik için |
 
+## Mimari
+
+![Modüller arası akış](docs/mimari.png)
+
+Modüller arası akış. Şema [GitDiagram](https://gitdiagram.com) ile depodan otomatik üretildi; Mermaid kaynağı [`docs/mimari.mmd`](docs/mimari.mmd).
+
 ## Kurulum
 
 Python 3.10 veya üstü gerekir.
